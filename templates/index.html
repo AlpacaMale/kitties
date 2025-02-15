@@ -1,0 +1,163 @@
+{% extends 'layout.html' %} {% block title %}HOME{% endblock %}{% block content %}
+<div class="search-bar">
+  <div class="title">Kitties</div>
+  <form class="search" action="" id="searchForm">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input id="searchInput" class="search__input" type="text" placeholder="Kitties 검색" value="{{ tag or '' }}" />
+  </form>
+  <button id="openUploadModal" class="upload-button"><i class="fa-solid fa-upload"></i> Upload</button>
+</div>
+
+<div class="container">
+  <div class="container__title">{{ length }} Images</div>
+  <div class="board">
+    {% if images %}
+    <div class="line">
+      {% for image in images[0] %}
+      <div class="cell">
+        <img src="/image/{{ image.filename }}" alt="{{ image.filename }}" />
+        <div class="cell__desc">
+          <div class="button-bar">
+            <button class="like-button {% if image.liked %}liked{% endif %}" data-image-id="{{ image.filename }}">
+              <i class="fa-solid fa-heart"></i>
+            </button>
+            <button class="download-button" onclick="location.href='/image/{{ image.filename }}/download'">
+              <i class="fa-solid fa-download"></i>
+            </button>
+            <button class="delete-button">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+          <div class="tag-bar">
+            {% for tag in image.metadata.tags %}
+            <button class="tag" onclick="location.href='/search/{{ tag }}'">{{ tag }}</button>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="line">
+      {% for image in images[1] %}
+      <div class="cell">
+        <img src="/image/{{ image.filename }}" alt="{{ image.filename }}" />
+        <div class="cell__desc">
+          <div class="button-bar">
+            <button class="like-button {% if image.liked %}liked{% endif %}" data-image-id="{{ image.filename }}">
+              <i class="fa-solid fa-heart"></i>
+            </button>
+            <button class="download-button" onclick="location.href='/image/{{ image.filename }}/download'">
+              <i class="fa-solid fa-download"></i>
+            </button>
+            <button class="delete-button">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+          <div class="tag-bar">
+            {% for tag in image.metadata.tags %}
+            <button class="tag" onclick="location.href='/search/{{ tag }}'">{{ tag }}</button>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="line">
+      {% for image in images[2] %}
+      <div class="cell">
+        <img src="/image/{{ image.filename }}" alt="{{ image.filename }}" />
+        <div class="cell__desc">
+          <div class="button-bar">
+            <button class="like-button {% if image.liked %}liked{% endif %}" data-image-id="{{ image.filename }}">
+              <i class="fa-solid fa-heart"></i>
+            </button>
+            <button class="download-button" onclick="location.href='/image/{{ image.filename }}/download'">
+              <i class="fa-solid fa-download"></i>
+            </button>
+            <button class="delete-button">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+          <div class="tag-bar">
+            {% for tag in image.metadata.tags %}
+            <button class="tag" onclick="location.href='/search/{{ tag }}'">{{ tag }}</button>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="line">
+      {% for image in images[3] %}
+      <div class="cell">
+        <img src="/image/{{ image.filename }}" alt="{{ image.filename }}" />
+        <div class="cell__desc">
+          <div class="button-bar">
+            <button class="like-button {% if image.liked %}liked{% endif %}" data-image-id="{{ image.filename }}">
+              <i class="fa-solid fa-heart"></i>
+            </button>
+            <button class="download-button" onclick="location.href='/image/{{ image.filename }}/download'">
+              <i class="fa-solid fa-download"></i>
+            </button>
+            <button class="delete-button">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+          <div class="tag-bar">
+            {% for tag in image.metadata.tags %}
+            <button class="tag" onclick="location.href='/search/{{ tag }}'">{{ tag }}</button>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<div id="uploadModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-status-bar">
+      <div></div>
+      <strong>Upload Image</strong>
+      <span id="closeUploadModal" class="close">&times;</span>
+    </div>
+    <form action="/" class="upload-form" method="post" enctype="multipart/form-data">
+      <div class="input-wrap">
+        <input id="fileInput" class="file" type="file" name="file" required accept="image/*" />
+        <label for="fileInput" class="input-label"><i class="fa-regular fa-image"></i> Upload your image</label>
+        <span class="input-name" id="fileName"></span>
+      </div>
+      <div class="input-wrap">
+        <label for="tagsInput" class="input-label"><i class="fa-solid fa-tag"></i> Tag your image</label>
+        <input class="input-name" id="tagsInput" type="text" name="tags" required placeholder="Enter tags separated by commas" />
+      </div>
+      <div class="input-wrap">
+        <label for="passwdInput" class="input-label"><i class="fa-solid fa-lock"></i> Set password</label>
+        <input class="input-name" id="passwdInput" type="password" name="password" required />
+      </div>
+      <button class="form-button" type="submit"><i class="fa-solid fa-paper-plane"></i> Submit</button>
+    </form>
+  </div>
+</div>
+
+<!-- 삭제 확인 모달 -->
+<div id="deleteModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-status-bar">
+      <div></div>
+      <strong>Delete Image</strong>
+      <span id="closeDeleteModal" class="close">&times;</span>
+    </div>
+    <div action="/" class="upload-form">
+      <div class="input-wrap">
+        <label for="deletePassword" class="input-label"><i class="fa-solid fa-lock"></i> Input password</label>
+        <input class="input-name" id="deletePassword" type="password" name="password" required />
+      </div>
+      <button id="confirmDelete" class="form-button" type="submit"><i class="fa-solid fa-paper-plane"></i> Submit</button>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
