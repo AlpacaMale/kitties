@@ -14,21 +14,21 @@
 
 ### Image 관련
 
-POST `/image` -> 이미지를 업로드 합니다.
-PUT `/image` -> 이미지를 수정합니다.
-DELETE `/image/:filename` -> 이미지를 삭제합니다.
-GET `/image/:filename` -> 이미지를 브라우저로 보냅니다.
-GET `/image/:filename/download` -> 이미지를 다운로드 할 수 있게 보냅니다.
+- POST `/image` -> 이미지를 업로드 합니다.
+- PUT `/image` -> 이미지를 수정합니다.
+- DELETE `/image/:filename` -> 이미지를 삭제합니다.
+- GET `/image/:filename` -> 이미지를 브라우저로 보냅니다.
+- GET `/image/:filename/download` -> 이미지를 다운로드 할 수 있게 보냅니다.
 
 ### Like 관련
 
-POST `/image/:filename/like` -> 세션 기반으로 좋아요를 추적하고, DB에 좋아요 수를 반영합니다.
-POST `/image/:filename/dislike` -> 세션에서 좋아요를 삭제하고, DB에 좋아요 수를 반영합니다.
+- POST `/image/:filename/like` -> 세션 기반으로 좋아요를 추적하고, DB에 좋아요 수를 반영합니다.
+- POST `/image/:filename/dislike` -> 세션에서 좋아요를 삭제하고, DB에 좋아요 수를 반영합니다.
 
 ### tag 관련
 
-GET `/` -> 고양이 사진이 나오는 홈 페이지입니다.
-GET `/search/:tag` -> 고양이 사진을 태그 기반으로 검색합니다.
+- GET `/` -> 고양이 사진이 나오는 홈 페이지입니다.
+- GET `/search/:tag` -> 고양이 사진을 태그 기반으로 검색합니다.
 
 ## 기술
 
